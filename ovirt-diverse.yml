@@ -1,0 +1,31 @@
+
+# ansible-playbook 10_manage_vm.yml -e "vm_state=running"
+# ansible-playbook 10_manage_vm.yml -e "vm_state=stopped"
+
+- name: Get VM status
+  ovirt.ovirt.ovirt_vm_info:
+    auth: "{{ ovirt_auth }}"
+    pattern: "name={{ vm_name }}"
+  register: vm_info
+
+- name: Create VM snapshot
+  ovirt.ovirt.ovirt_snapshot:
+    auth: "{{ ovirt_auth }}"
+    vm_name: "{{ vm_name }}"
+    description: "Pre-update snapshot"
+    state: present
+
+- name: Clone VM
+  ovirt.ovirt.ovirt_vm:
+    auth: "{{ ovirt_auth }}"
+    name: "{{ new_vm_name }}"
+    clone: true
+    clone_from: "{{ source_vm_name }}"
+    state: present
+
+- name: Remove VM
+  ovirt.ovirt.ovirt_vm:
+    auth: "{{ ovirt_auth }}"
+    name: "{{ vm_name }}"
+    state: absent
+
