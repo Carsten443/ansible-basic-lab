@@ -1,0 +1,188 @@
+2  sudo apt install python3.12-venv -y
+    3  python3 -m venv .venv
+    4  source .venv/bin/activate
+    5  pip install ansible==12.0.0
+    6  ansible --version
+    7  vi ~/.ansible.cfg
+    8  ansible-config view
+    9  ansible-config validate
+   10  vi ~/hosts.ini
+   11  ansible-inventory --graph
+   12  ssh-keygen
+   13  ssh-copy-id server1
+   14  ssh-copy-id server2
+   15  ssh-copy-id server3
+   16  ssh-copy-id server4
+   17  ssh-copy-id ovirt
+   18  ssh-copy-id host1
+   19  ansible -m ping all
+   20  ls -al
+   21  pwd
+   22  git config --global init.defaultBranch main
+   23  git config --global user.name "Carsten Jensen"
+   24  git config --global user.email "carsten@5post.dk"
+   25  ssh-keygen -t ed25519 -C "carsten@5post.dk" -f ~/.ssh/id_git
+   26  echo "Host github.com
+  AddKeysToAgent yes
+  IdentityFile ~/.ssh/id_git" > ~/.ssh/config
+   27  cat ~/.ssh/id_git.pub
+   28  mkdir git
+   29  cd git
+   30  git init ansible-basic-lab
+   31  cd ansible-basic-lab/
+   32  git status
+   33  echo "# Ansible-basic-lab" > README.md
+   34  git status
+   35  git add .
+   36  git status
+   37  git commit -m "First Commit"
+   38  #git remote add "origin" carsten443@github.com: >>/ansible-basic-lab.git
+   39  git status
+   40  git remote add "origin" git@github.com:carsten443 >>/ansible-basic-lab.git
+   41  git remote add "origin" git@github.com:carsten443//ansible-basic-lab.git
+   41  git remote add "origin" git@github.com:carsten443//ansible-basic-lab.git
+   42  git status
+   43  git status remote
+   44  git push -u origin main
+   45  git remote add "origin" git@github.com:carsten443/ansible-basic-lab.git
+   46  ls
+   47  ls .a
+   48  ls -al
+   49  cd .git/
+   50  ls
+   51  vi config
+   52  git push -u origin main
+   53  cd ..
+   54  ls
+   55  code .
+   56  ansible-playbook ping_all.yml
+   57  docker images
+   58  ansible-playbook ping_all.yml ls
+   59  ansible-playbook ping_all.yml
+   60  ansible-playbook ping_all.yml --list-task
+   61  ansible-playbook ping_all.yml --list-hosts
+    62  ansible-playbook 01_playbook.yml
+   63  ansible-playbook --syntax-check
+   64  ansible-playbook 01_playbook.yml
+   65  ansible-playbook 01_vars.yml
+   66  ansible-playbook 01_vars.yml -e "is_it_break_time=false"
+   67  clear
+   68  ansible-playbook 01_vars.yml -e "is_it_break_time=false"
+   69  ansible-playbook 01_facts.yml
+   70  ansible-playbook -v 01_register.yml
+   71  ansible-playbook -v 01_register.yml /v
+   72  ansible-playbook -v 01_register.yml -v
+   73  ansible-playbook -v 01_register.yml
+   74  ansible-playbook 01_conditions.yml
+   75  ansible-playbook 01_stat.yml
+   76  ansible-playbook 01_become.yml
+   77  LS
+   78  ls
+   79  ansible-playbook exercise01.yml
+   80  ansible-playbook 01_handlers.yml
+   81  ansible-playbook 01_block.yml
+   82  ansible-playbook 01_tag.yml
+   83  ansible-playbook 01_tag.yml --tags yellow
+   84  ansible-playbook 01_tag.yml --tags apple
+   85  ansible-playbook 01_tag.yml --tags yellow,apple
+   86  ansible-playbook 01_tag.yml --skip-tags yellow
+   87  ansible-playbook 01_tag.yml --skip-tags yellow,apple
+   88  ansible-playbook 01_tag.yml
+   89  ansible-playbook 01_tag.yml --tags fruit
+   90  ansible-playbook 01_tag.yml --tags color --skip-tags fruit
+   91  mkdir templates
+   92  cd templates
+   93  vi template1.cfg.js2
+   94  ansible-playbook 01_template.yml
+   95  ls
+   96  cd ..
+   97  ls
+   98  ansible-playbook 01_template.yml
+   99  ssh server1 'cat /tmp/ansible_template'
+  100  ssh server2 'cat /tmp/ansible_template'
+  101  ansible-doc -t lookup -l
+  102  ansible-doc -t lookup community.general.random_pet
+  103  pip install petname
+  104  ansible-playbook 01_lookup.yml
+  105  git status
+  106  ansible-playbook 01_lookup.yml
+  107  ansible-playbook 01_loop.yml
+  108  ssh server1 'ls -l /tmp/file*.txt'
+  109  ansible-playbook 01_loop.yml
+  110  ssh server1 'ls -l /tmp/logfile*.log'
+  111  ansible-playbook 01_loop.yml
+  112  ansible-playbook 01_async.yml
+  113  ansible-playbook 02_async.yml
+  114  ansible-playbook 01_filter.yml
+  115  cat ~/hosts.ini
+  116  ansible-inventory --list
+  117  ansible-inventory --graph
+  118  ansible-inventory --host server1
+  119  vi ~/hosts.ini
+  120  ansible-inventory --list
+  121  ansible-inventory --host server1
+  122  vi ~/hosts.ini
+  123  ansible-inventory --host server1
+  124  ansible-inventory --host server3
+  125  vi ~/hosts.ini
+  126  ansible-inventory --graph
+  127  vi ~/hosts.ini
+  128  ansible-inventory --graph
+  129  ansible-playbook 01_inventory.yml
+  130  ansible-playbook 01_inventory.yml --limit copenhagen
+  131  ansible-playbook 01_inventory.yml --limit stockholm
+  132  ansible-playbook 01_inventory.yml --limit production
+  133  vi ~/hosts.yml
+  134  ansible-inventory -i ~/hosts.yml --graph
+  135  ansible-inventory -i ~/hosts.yml --list
+  136  ansible-inventory -i ~/hosts.yml --host server1
+  137  ansible-playbook -i ~/hosts.yml 01_inventory.yml
+  138  ansible -i ~/hosts.ini all -m ping
+  139  ansible -i ~/hosts.yml all -m ping
+  140  ansible -i ~/hosts.yml copenhagen -m shell -a "hostname"
+  141  ansible-playbook 01_filter.yml
+  142  ls -al
+  143  cat ~/hosts.ini
+  144  ansible-playbook 01_inventory.yml
+  145  ansible-inventory -i ~/hosts.yml --graph
+  146  ansible-playbook -i ~/hosts.yml 01_inventory.yml
+  147  vi ~/.ansible.cfg
+  148  ansible-inventory --graph
+  149  ansible all -m ping
+  150  cd ~/git/ansible-basic-lab
+  151  mkdir -p group_vars host_vars
+  152  vi group_vars/copenhagen.yml
+  153  vi group_vars/stockholm.yml
+  154  vi group_vars/nordics.yml
+  155  vi host_vars/server1.yml
+  156  vi host_vars/server2.yml
+  157  vi host_vars/server3.yml
+  158  vi host_vars/server4.yml
+  159  vi ~/hosts.yml
+  160  ansible-playbook 02_vars_test.yml
+  161  vi group_vars/all.yml
+  162  ansible-playbook 02_vars_test.yml
+  163  ansible-playbook 02_vars_test.yml -e "datacenter=cloud"
+  164  tree -L 2
+  165  ansible-doc -t inventory -l
+  166  ansible-doc -t inventory azure.azcollection.azure_rm
+  167  ansible-doc -t inventory amazon.aws.aws_ec2
+  168  ansible-galaxy collection install azure.azcollection --force
+  169  pip install -r ~/.ansible/collections/ansible_collections/azure/azcollection/requirements.txt
+  170  mkdir -p ~/.azure
+  171  vi ~/.azure/credentials
+  172  ansible-inventory -i inventory.azure_rm.yml --graph
+  173  ansible-inventory -i inventory.azure_rm.yml --list
+  174  ls
+  175  ls -alrt
+  176  chmod +x custom_inventory.py
+  177  ./custom_inventory.py --list
+  178  ./custom_inventory.py --host server1
+  179  ansible-inventory -i custom_inventory.py --list
+  180  ansible-inventory -i custom_inventory.py --graph
+  181  ansible -i custom_inventory.py all -m ping
+  182  ansible-playbook -i custom_inventory.py 01_inventory.yml
+  183  mkdir -p inventory
+  184  cp ~/hosts.yml inventory/
+  185  cp custom_inventory.py inventory/
+  186  ansible-inventory -i inventory/ --graph
